@@ -9,10 +9,10 @@ class QueryBuilder
 {
     private $pdo, $queryFactory;
 
-    public function __construct()
+    public function __construct(PDO $pdo, QueryFactory $queryFactory)
     {
-        $this->pdo = new PDO('mysql:host=mysql;dbname=app3;charset=utf8', 'root', 'secret');
-        $this->queryFactory = new QueryFactory('mysql');
+        $this->pdo = $pdo;
+        $this->queryFactory = $queryFactory;
     }
 
     public function getAll($table)
@@ -39,7 +39,7 @@ class QueryBuilder
 
         $sth = $this->pdo->prepare($select->getStatement());
         $sth->execute($select->getBindValues());
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $result = $sth->fetch(PDO::FETCH_ASSOC);
 
         return $result;
     }
