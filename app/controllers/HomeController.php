@@ -3,17 +3,10 @@
 namespace App\controllers;
 
 use Delight\Auth\Auth;
-
-if (!session_id()) @session_start();
-
 use App\QueryBuilder;
 use App\Input;
-use App\exceptions\NotEnoughMoneyException;
-use Aura\SqlQuery\QueryFactory;
 use League\Plates\Engine;
 use PDO;
-use JasonGrimes\Paginator;
-use \Tamtamchik\SimpleFlash\Flash;
 use \Valitron\Validator;
 use Plasticbrain\FlashMessages\FlashMessages;
 

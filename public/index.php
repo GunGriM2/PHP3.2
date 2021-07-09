@@ -33,21 +33,6 @@ $containerBuilder->addDefinitions([
 ]);
 $container = $containerBuilder->build();
 
-// $transport = (new Swift_SmtpTransport('smtp.mailtrap.io', 2525))
-//     ->setUsername('07568447bbf596')
-//     ->setPassword('6e2a9ea439c43e');
-
-
-// $mailer = new Swift_Mailer($transport);
-
-// $message = (new Swift_Message('Серьезная маза'))
-//     ->setFrom(['john@doe.com' => 'Maksim Grin'])
-//     ->setTo('receiver@domain.org')
-//     ->setBody('Сбегай кабанчиком за клубничкой, циферки мои знаешь, на созвоне...');
-
-// // Send the message
-// $result = $mailer->send($message);
-
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
 
     $r->addRoute('GET', '/home', ['App\controllers\HomeController', 'index']);
@@ -82,11 +67,6 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
 
     $r->addRoute('GET', '/users/edit/{id:\d+}', ['App\controllers\HomeController', 'userEdit']);
     $r->addRoute('POST', '/users/edit/{id:\d+}', ['App\controllers\HomeController', 'userEdit']);
-
-    // $r->addRoute('GET', '/verification', ['App\controllers\HomeController', 'email_verification']);
-    // $r->addRoute('GET', '/paginate[/{page:\d+}]', ['App\controllers\HomeController', 'paginate']);
-    // // The /{title} suffix is optional
-    // $r->addRoute('GET', '/articles/{id:\d+}[/{title}]', 'get_article_handler');
 });
 
 // Fetch method and URI from somewhere
@@ -115,12 +95,5 @@ switch ($routeInfo[0]) {
         $vars = $routeInfo[2];
 
         $container->call($handler, [$vars]);
-
-        // ... call $handler with $vars
-        // $controller = new $handler[0];
-        // call_user_func([$controller, $handler[1]], $vars);
-        // d($controller);
-        // call_user_func($handler[0], $handler[1], $vars);
-
         break;
 }
